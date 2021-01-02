@@ -12,9 +12,10 @@ def get_cpu_temp():
     with open("/sys/class/thermal/thermal_zone0/temp", "r") as fp:
         str_temp = fp.readline().strip()
     temp_in_c = round(float(str_temp / 100), 4)
-    return temp_in_c
+    cpu_temp_gauge.set(temp_in_c)
 
 
 if __name__ == '__main__':
-    cpu_temp_gauge.set_function(get_cpu_temp)
     start_http_server(8000)
+    while True:
+        get_cpu_temp()
