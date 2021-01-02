@@ -3,8 +3,9 @@ from prometheus_client import Gauge, start_http_server
 cpu_temp_gauge = Gauge("cpu_temp", "CPU Temperature in Celsius")
 
 
+@cpu_temp_gauge.time()
 def get_cpu_temp():
-    """Get the temperture of the CPU as reported by the Linux Kernel.
+    """Get the temperature of the CPU as reported by the Linux Kernel.
 
     Data is pulled from /sys/class/thermal/thermal_zone0/temp
     """
